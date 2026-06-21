@@ -47,6 +47,10 @@ export default function ProductForm() {
         })
         .catch(() => toast.error('Failed to load product'))
         .finally(() => setLoading(false));
+    } else {
+      productService.getNextBarcode()
+        .then((res) => setForm((p) => ({ ...p, barcode: res.data.data })))
+        .catch(() => {});
     }
   }, [id]);
 

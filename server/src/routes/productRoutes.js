@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getProducts, getProductById, createProduct, updateProduct, deleteProduct, findByBarcode } = require('../controllers/productController');
+const { getProducts, getProductById, createProduct, updateProduct, deleteProduct, findByBarcode, generateNextBarcode } = require('../controllers/productController');
 const { authMiddleware } = require('../middleware/authMiddleware');
 const { tenantMiddleware } = require('../middleware/tenantMiddleware');
 const { rbacMiddleware } = require('../middleware/rbacMiddleware');
@@ -9,6 +9,7 @@ const { productSchema } = require('../validators/productValidator');
 
 router.use(authMiddleware, tenantMiddleware);
 router.get('/', getProducts);
+router.get('/next-barcode', generateNextBarcode);
 router.get('/barcode/:code', findByBarcode);
 router.get('/:id', getProductById);
 router.post('/', rbacMiddleware('ADMIN', 'MANAGER'), validate(productSchema), createProduct);

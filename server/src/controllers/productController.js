@@ -74,5 +74,20 @@ const findByBarcode = asyncHandler(async (req, res) => {
   res.json({ success: true, message: 'Product found', data: product });
 });
 
-module.exports = { getProducts, getProductById, createProduct, updateProduct, deleteProduct, findByBarcode };
+const generateNextBarcode = asyncHandler(async (req, res) => {
+  const Product = DatabaseManager.getModel(req.companyId, 'ProductModel');
+  const prefix = '890';
+  const digits = 10;
+  const lastProduct = await Product.findOne({ companyId: req.companyId, isDeleted: false, barcode: { $regex: `^${prefix}` } })
+    .sort({ barcode: -1 }).select('barcode').lean();
+  let next = 1;
+  if (lastProduct?.barcode) {
+    const num = parseInt(lastProduct.barcode.slice(prefix.length), 10);
+    if (!isNaN(num)) next = num + 1;
+  }
+  const barcode = prefix + String(next).padStart(digits, '0');
+  res.json({ success: true, data: barcode });
+});
+
+module.exports = { getProducts, getProductById, createProduct, updateProduct, deleteProduct, findByBarcode, generateNextBarcode };
 

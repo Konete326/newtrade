@@ -7,4 +7,5 @@ export const productService = {
   update: (id, data) => apiClient.put(`/products/${id}`, data),
   delete: (id) => apiClient.delete(`/products/${id}`),
   findByBarcode: (code) => apiClient.get(`/products/barcode/${code}`),
+  getNextBarcode: () => apiClient.get('/products/next-barcode'),
 };
