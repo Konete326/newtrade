@@ -7,7 +7,7 @@ export default function MainLayout() {
   return (
     <div className="flex h-screen overflow-hidden">
       <Sidebar />
-      <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden bg-gray-50 dark:bg-black">
+      <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden bg-gray-50 dark:bg-black scrollbar-thin scrollbar-track-transparent scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-700">
         <Overlay />
         <Header />
         <main>

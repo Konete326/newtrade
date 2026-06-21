@@ -120,3 +120,26 @@ a:disabled, button:disabled, [role="button"]:disabled {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* Global themed scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #d1d5db transparent;
+}
+.dark * {
+  scrollbar-color: #374151 transparent;
+}
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: #d1d5db;
+  border-radius: 9999px;
+}
+.dark *::-webkit-scrollbar-thumb {
+  background-color: #374151;
+}
