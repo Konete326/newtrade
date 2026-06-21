@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { productService } from '../../services/productService';
-import { validators } from '../../utils/validators';
+import { validators, inputFilters } from '../../utils/validators';
 import { useValidation } from '../../hooks/useValidation';
 import PageHeader from '../../components/PageHeader';
 import LoadingSpinner from '../../components/LoadingSpinner';
@@ -113,7 +113,7 @@ export default function ProductForm() {
           </div>
           <div>
             <label className="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300">Barcode</label>
-            <input value={form.barcode} onChange={(e) => onChange('barcode', e.target.value)} onBlur={() => onBlur('barcode')} placeholder="e.g. 8901234567890" className={inputClass('barcode')} />
+            <input value={form.barcode} onChange={(e) => onChange('barcode', inputFilters.numbersOnly(e.target.value))} onBlur={() => onBlur('barcode')} placeholder="e.g. 8901234567890" className={inputClass('barcode')} />
             {touched.barcode && errors.barcode && <p className="mt-1 text-xs text-error-600 dark:text-error-400">{errors.barcode}</p>}
           </div>
           <div>
@@ -134,22 +134,22 @@ export default function ProductForm() {
           </div>
           <div>
             <label className="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300">Purchase Price *</label>
-            <input value={form.purchasePrice} onChange={(e) => onChange('purchasePrice', e.target.value)} onBlur={() => onBlur('purchasePrice')} placeholder="e.g. 500" className={inputClass('purchasePrice')} />
+            <input value={form.purchasePrice} onChange={(e) => onChange('purchasePrice', inputFilters.decimalOnly(e.target.value))} onBlur={() => onBlur('purchasePrice')} placeholder="e.g. 500" className={inputClass('purchasePrice')} />
             {touched.purchasePrice && errors.purchasePrice && <p className="mt-1 text-xs text-error-600 dark:text-error-400">{errors.purchasePrice}</p>}
           </div>
           <div>
             <label className="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300">Sale Price *</label>
-            <input value={form.salePrice} onChange={(e) => onChange('salePrice', e.target.value)} onBlur={() => onBlur('salePrice')} placeholder="e.g. 650" className={inputClass('salePrice')} />
+            <input value={form.salePrice} onChange={(e) => onChange('salePrice', inputFilters.decimalOnly(e.target.value))} onBlur={() => onBlur('salePrice')} placeholder="e.g. 650" className={inputClass('salePrice')} />
             {touched.salePrice && errors.salePrice && <p className="mt-1 text-xs text-error-600 dark:text-error-400">{errors.salePrice}</p>}
           </div>
           <div>
             <label className="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300">Wholesale Price</label>
-            <input value={form.wholesalePrice} onChange={(e) => onChange('wholesalePrice', e.target.value)} onBlur={() => onBlur('wholesalePrice')} placeholder="e.g. 600" className={inputClass('wholesalePrice')} />
+            <input value={form.wholesalePrice} onChange={(e) => onChange('wholesalePrice', inputFilters.decimalOnly(e.target.value))} onBlur={() => onBlur('wholesalePrice')} placeholder="e.g. 600" className={inputClass('wholesalePrice')} />
             {touched.wholesalePrice && errors.wholesalePrice && <p className="mt-1 text-xs text-error-600 dark:text-error-400">{errors.wholesalePrice}</p>}
           </div>
           <div>
             <label className="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300">Min Stock Alert</label>
-            <input value={form.minStock} onChange={(e) => onChange('minStock', e.target.value)} placeholder="e.g. 10" className={inputClass('minStock')} />
+            <input value={form.minStock} onChange={(e) => onChange('minStock', inputFilters.numbersOnly(e.target.value))} placeholder="e.g. 10" className={inputClass('minStock')} />
           </div>
         </div>
         <div className="mt-5">
