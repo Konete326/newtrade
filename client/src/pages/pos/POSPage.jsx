@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { saleService } from '../../services/saleService';
+import { inputFilters } from '../../utils/validators';
 import PageHeader from '../../components/PageHeader';
 import { ShoppingCart, Plus, Trash2, CreditCard, Banknote } from 'lucide-react';
 import { toast } from 'sonner';
@@ -49,8 +50,8 @@ export default function POSPage() {
               {items.map((item, i) => (
                 <div key={i} className="flex items-center gap-2">
                   <input value={item.productId} onChange={(e) => updateItem(i, 'productId', e.target.value)} placeholder="Product ID" className="flex-1 rounded-lg border border-gray-200 px-3 py-2 text-sm dark:border-gray-700 dark:bg-black dark:text-gray-200" />
-                  <input value={item.quantity} onChange={(e) => updateItem(i, 'quantity', e.target.value)} placeholder="Qty" className="w-20 rounded-lg border border-gray-200 px-3 py-2 text-sm dark:border-gray-700 dark:bg-black dark:text-gray-200" />
-                  <input value={item.price} onChange={(e) => updateItem(i, 'price', e.target.value)} placeholder="Price" className="w-24 rounded-lg border border-gray-200 px-3 py-2 text-sm dark:border-gray-700 dark:bg-black dark:text-gray-200" />
+                  <input value={item.quantity} onChange={(e) => updateItem(i, 'quantity', inputFilters.decimalOnly(e.target.value))} placeholder="Qty" className="w-20 rounded-lg border border-gray-200 px-3 py-2 text-sm dark:border-gray-700 dark:bg-black dark:text-gray-200" />
+                  <input value={item.price} onChange={(e) => updateItem(i, 'price', inputFilters.decimalOnly(e.target.value))} placeholder="Price" className="w-24 rounded-lg border border-gray-200 px-3 py-2 text-sm dark:border-gray-700 dark:bg-black dark:text-gray-200" />
                   <span className="w-24 text-right text-sm font-medium text-gray-700 dark:text-gray-300">Rs. {((Number(item.quantity) || 0) * (Number(item.price) || 0)).toLocaleString()}</span>
                   {items.length > 1 && <button onClick={() => removeItem(i)} className="p-1.5 text-error-500 hover:bg-error-50"><Trash2 size={14} /></button>}
                 </div>
