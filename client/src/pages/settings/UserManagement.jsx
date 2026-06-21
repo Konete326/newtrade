@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
 import { userService } from '../../services/userService';
+import { useAuth } from '../../context/AuthContext';
 import DataTable from '../../components/DataTable';
 import PageHeader from '../../components/PageHeader';
 import FormModal from '../../components/FormModal';
 import ConfirmDialog from '../../components/ConfirmDialog';
 import { validators } from '../../utils/validators';
-import { Plus, Edit, Trash2 } from 'lucide-react';
+import { Plus, Trash2 } from 'lucide-react';
 import { toast } from 'sonner';
 
 export default function UserManagement() {
+  const { user: currentUser } = useAuth();
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
@@ -49,7 +51,11 @@ export default function UserManagement() {
     { key: 'isActive', label: 'Status', render: (val) => <span className={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-medium ${val !== false ? 'bg-success-100 text-success-700 dark:bg-success-500/15 dark:text-success-400' : 'bg-error-100 text-error-700'}`}>{val !== false ? 'Active' : 'Inactive'}</span> },
     { key: '_id', label: 'Actions', sortable: false, render: (_, row) => (
       <div className="flex items-center gap-1">
-        <button onClick={() => setDeleteTarget(row)} className="rounded-lg p-1.5 text-error-500 hover:bg-error-50"><Trash2 size={15} /></button>
+        {row._id !== currentUser?._id ? (
+          <button onClick={() => setDeleteTarget(row)} className="rounded-lg p-1.5 text-error-500 hover:bg-error-50"><Trash2 size={15} /></button>
+        ) : (
+          <span className="px-2 text-xs text-gray-400">—</span>
+        )}
       </div>
     )},
   ];

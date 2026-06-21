@@ -36,6 +36,11 @@ const updateUser = asyncHandler(async (req, res) => {
 });
 
 const deleteUser = asyncHandler(async (req, res) => {
+  // Block self-deletion — no user can delete their own account
+  if (req.user.userId === req.params.id) {
+    throw new AppError('You cannot delete your own account.', 403);
+  }
+
   const User = await getUserModel();
   const user = await User.findOneAndUpdate(
     { _id: req.params.id, companyId: req.companyId, isDeleted: false },
