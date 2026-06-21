@@ -92,7 +92,7 @@ export default function ProductForm() {
   };
 
   const inputClass = (field) =>
-    `w-full rounded-lg border px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 dark:bg-gray-800 dark:text-gray-200 dark:placeholder:text-gray-500 ${
+    `w-full rounded-lg border px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 dark:bg-black dark:text-gray-200 dark:placeholder:text-gray-500 ${
       touched[field] && errors[field]
         ? 'border-error-400 focus:border-error-400 focus:ring-error-500/10'
         : 'border-gray-200 focus:border-brand-300 focus:ring-brand-500/10 dark:border-gray-700'

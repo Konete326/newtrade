@@ -48,9 +48,9 @@ export default function POSPage() {
             <div className="space-y-2">
               {items.map((item, i) => (
                 <div key={i} className="flex items-center gap-2">
-                  <input value={item.productId} onChange={(e) => updateItem(i, 'productId', e.target.value)} placeholder="Product ID" className="flex-1 rounded-lg border border-gray-200 px-3 py-2 text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200" />
-                  <input value={item.quantity} onChange={(e) => updateItem(i, 'quantity', e.target.value)} placeholder="Qty" className="w-20 rounded-lg border border-gray-200 px-3 py-2 text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200" />
-                  <input value={item.price} onChange={(e) => updateItem(i, 'price', e.target.value)} placeholder="Price" className="w-24 rounded-lg border border-gray-200 px-3 py-2 text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200" />
+                  <input value={item.productId} onChange={(e) => updateItem(i, 'productId', e.target.value)} placeholder="Product ID" className="flex-1 rounded-lg border border-gray-200 px-3 py-2 text-sm dark:border-gray-700 dark:bg-black dark:text-gray-200" />
+                  <input value={item.quantity} onChange={(e) => updateItem(i, 'quantity', e.target.value)} placeholder="Qty" className="w-20 rounded-lg border border-gray-200 px-3 py-2 text-sm dark:border-gray-700 dark:bg-black dark:text-gray-200" />
+                  <input value={item.price} onChange={(e) => updateItem(i, 'price', e.target.value)} placeholder="Price" className="w-24 rounded-lg border border-gray-200 px-3 py-2 text-sm dark:border-gray-700 dark:bg-black dark:text-gray-200" />
                   <span className="w-24 text-right text-sm font-medium text-gray-700 dark:text-gray-300">Rs. {((Number(item.quantity) || 0) * (Number(item.price) || 0)).toLocaleString()}</span>
                   {items.length > 1 && <button onClick={() => removeItem(i)} className="p-1.5 text-error-500 hover:bg-error-50"><Trash2 size={14} /></button>}
                 </div>
@@ -63,7 +63,7 @@ export default function POSPage() {
           <h3 className="mb-4 text-sm font-semibold text-gray-800 dark:text-gray-200">Checkout</h3>
           <div className="mb-4">
             <label className="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300">Customer ID</label>
-            <input value={customerId} onChange={(e) => setCustomerId(e.target.value)} placeholder="e.g. customer _id" className="w-full rounded-lg border border-gray-200 px-3 py-2.5 text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200" />
+            <input value={customerId} onChange={(e) => setCustomerId(e.target.value)} placeholder="e.g. customer _id" className="w-full rounded-lg border border-gray-200 px-3 py-2.5 text-sm dark:border-gray-700 dark:bg-black dark:text-gray-200" />
           </div>
           <div className="mb-4">
             <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">Payment Method</label>

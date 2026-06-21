@@ -38,7 +38,7 @@ export default function FormInput({
 
   const error = touched ? validateField(value, rules) : null;
 
-  const baseClass = `w-full rounded-lg border px-4 py-2.5 text-sm dark:bg-gray-800 dark:text-gray-200 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:ring-2 transition`;
+  const baseClass = `w-full rounded-lg border px-4 py-2.5 text-sm dark:bg-black dark:text-gray-200 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:ring-2 transition`;
   const borderClass = error
     ? 'border-error-400 focus:border-error-400 focus:ring-error-500/10'
     : 'border-gray-200 dark:border-gray-700 focus:border-brand-300 focus:ring-brand-500/10';

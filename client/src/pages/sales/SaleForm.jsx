@@ -7,7 +7,7 @@ import { validators, inputFilters } from '../../utils/validators';
 import { Save, Plus, Trash2 } from 'lucide-react';
 import { toast } from 'sonner';
 
-const itemInputClass = 'rounded-lg border border-gray-200 px-3 py-2 text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:border-brand-300 focus:ring-brand-500/10';
+const itemInputClass = 'rounded-lg border border-gray-200 px-3 py-2 text-sm dark:border-gray-700 dark:bg-black dark:text-gray-200 focus:outline-none focus:ring-2 focus:border-brand-300 focus:ring-brand-500/10';
 
 export default function SaleForm() {
   const navigate = useNavigate();
@@ -83,7 +83,7 @@ export default function SaleForm() {
             <div className="flex justify-between text-sm"><span className="text-gray-500">Subtotal:</span><span className="font-medium text-gray-800 dark:text-gray-200">Rs. {subtotal.toLocaleString()}</span></div>
             <div className="flex items-center justify-between gap-3">
               <span className="text-sm text-gray-500">Discount:</span>
-              <input value={form.discount} onChange={(e) => set('discount')(inputFilters.decimalOnly(e.target.value))} placeholder="0" className="w-32 rounded-lg border border-gray-200 px-3 py-1.5 text-right text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200" />
+              <input value={form.discount} onChange={(e) => set('discount')(inputFilters.decimalOnly(e.target.value))} placeholder="0" className="w-32 rounded-lg border border-gray-200 px-3 py-1.5 text-right text-sm dark:border-gray-700 dark:bg-black dark:text-gray-200" />
             </div>
             <div className="flex justify-between text-base"><span className="font-semibold text-gray-800 dark:text-gray-200">Grand Total:</span><span className="text-lg font-bold text-brand-600 dark:text-brand-400">Rs. {grandTotal.toLocaleString()}</span></div>
           </div>

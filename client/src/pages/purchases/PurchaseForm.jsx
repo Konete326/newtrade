@@ -7,7 +7,7 @@ import { validators, inputFilters } from '../../utils/validators';
 import { Save, Plus, Trash2 } from 'lucide-react';
 import { toast } from 'sonner';
 
-const itemInputClass = 'rounded-lg border border-gray-200 px-3 py-2 text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:border-brand-300 focus:ring-brand-500/10';
+const itemInputClass = 'rounded-lg border border-gray-200 px-3 py-2 text-sm dark:border-gray-700 dark:bg-black dark:text-gray-200 focus:outline-none focus:ring-2 focus:border-brand-300 focus:ring-brand-500/10';
 
 export default function PurchaseForm() {
   const navigate = useNavigate();
