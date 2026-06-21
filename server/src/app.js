@@ -27,16 +27,21 @@ const app = express();
 app.use(helmet());
 
 // CORS: allow FRONTEND_URL (supports comma-separated list for multiple origins)
-const allowedOrigins = (process.env.FRONTEND_URL || 'http://localhost:5173')
-  .split(',')
-  .map((o) => o.trim());
+const envOrigins = (process.env.FRONTEND_URL || '').split(',').map((o) => o.trim()).filter(Boolean);
+const allowedOrigins = envOrigins.length ? envOrigins : ['*'];
 app.use(cors({
   origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin) || allowedOrigins.includes('*')) {
-      callback(null, true);
-    } else {
-      callback(null, false);
+    // Allow requests with no origin (mobile apps, curl, etc.)
+    if (!origin) return callback(null, true);
+    // Allow all if wildcard or list includes it
+    if (allowedOrigins.includes('*') || allowedOrigins.includes(origin)) {
+      return callback(null, true);
     }
+    // Allow any vercel.app subdomain
+    if (origin.endsWith('.vercel.app')) {
+      return callback(null, true);
+    }
+    callback(null, false);
   },
   credentials: true,
 }));
