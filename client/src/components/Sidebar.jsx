@@ -100,6 +100,28 @@ export default function Sidebar() {
               const isExpanded = expanded[item.id];
 
               if (item.children) {
+                const isCollapsed = !sidebarToggle;
+                const defaultPath = item.children[0].path;
+
+                if (isCollapsed) {
+                  return (
+                    <li key={item.id}>
+                      <Link
+                        to={defaultPath}
+                        onClick={() => { if (window.innerWidth < 1024) setSidebarToggle(false); }}
+                        className={`flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
+                          active
+                            ? 'bg-brand-50 text-brand-700 dark:bg-brand-500/15 dark:text-brand-400'
+                            : 'text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800'
+                        }`}
+                      >
+                        <Icon size={20} className={active ? 'text-brand-600 dark:text-brand-400' : 'text-gray-500 dark:text-gray-400'} />
+                        <span className="lg:hidden flex-1 text-left">{item.label}</span>
+                      </Link>
+                    </li>
+                  );
+                }
+
                 return (
                   <li key={item.id}>
                     <button
@@ -111,8 +133,8 @@ export default function Sidebar() {
                       }`}
                     >
                       <Icon size={20} className={active ? 'text-brand-600 dark:text-brand-400' : 'text-gray-500 dark:text-gray-400'} />
-                      <span className={`${!sidebarToggle ? 'lg:hidden' : ''} flex-1 text-left`}>{item.label}</span>
-                      <ChevronDown size={16} className={`transition-transform ${isExpanded ? 'rotate-180' : ''} ${!sidebarToggle ? 'lg:hidden' : ''}`} />
+                      <span className="flex-1 text-left">{item.label}</span>
+                      <ChevronDown size={16} className={`transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
                     </button>
                     <div className={`overflow-hidden ${isExpanded ? 'block' : 'hidden'}`}>
                       <ul className="ml-5 mt-1 flex flex-col gap-0.5 border-l border-gray-200 pl-4 dark:border-gray-700">
@@ -120,6 +142,7 @@ export default function Sidebar() {
                           <li key={child.path}>
                             <Link
                               to={child.path}
+                              onClick={() => { if (window.innerWidth < 1024) setSidebarToggle(false); }}
                               className={`block rounded-lg px-3 py-2 text-sm transition-colors ${
                                 isActive(child.path)
                                   ? 'font-medium text-brand-700 dark:text-brand-400'
