@@ -161,7 +161,7 @@ export default function ProductForm() {
           <textarea value={form.description} onChange={(e) => onChange('description', e.target.value)} rows={3} placeholder="Product description (optional)" className={inputClass('description')} />
         </div>
         <div className="mt-6 flex justify-end gap-3">
-          <button type="button" onClick={() => navigate('/products')} className="rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-700 transition hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700">Cancel</button>
+          <button type="button" onClick={() => navigate('/products')} className="rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-700 transition hover:bg-gray-50 dark:border-gray-700 dark:bg-black dark:text-gray-300 dark:hover:bg-gray-900">Cancel</button>
           <button type="submit" disabled={saving} className="inline-flex items-center gap-2 rounded-lg bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-700 disabled:opacity-60 dark:bg-brand-500 dark:hover:bg-brand-600">
             <Save size={16} />
             {saving ? 'Saving...' : isEdit ? 'Update Product' : 'Create Product'}

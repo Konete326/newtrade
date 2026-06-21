@@ -64,7 +64,7 @@ export default function ChallanForm() {
           </div>
         </div>
         <div className="flex justify-end gap-3">
-          <button type="button" onClick={() => navigate('/challans')} className="rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300">Cancel</button>
+          <button type="button" onClick={() => navigate('/challans')} className="rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-700 dark:border-gray-700 dark:bg-black dark:text-gray-300">Cancel</button>
           <button type="submit" disabled={saving} className="inline-flex items-center gap-2 rounded-lg bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-700 disabled:opacity-60"><Save size={16} />{saving ? 'Saving...' : 'Create Challan'}</button>
         </div>
       </form>

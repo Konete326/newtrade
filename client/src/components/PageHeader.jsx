@@ -10,7 +10,7 @@ export default function PageHeader({ title, subtitle = '', actions = [], backPat
         {backPath && (
           <button
             onClick={() => navigate(backPath)}
-            className="flex h-9 w-9 items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-600 transition hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
+            className="flex h-9 w-9 items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-600 transition hover:bg-gray-50 dark:border-gray-700 dark:bg-black dark:text-gray-300 dark:hover:bg-gray-900"
           >
             <ArrowLeft size={18} />
           </button>
@@ -28,7 +28,7 @@ export default function PageHeader({ title, subtitle = '', actions = [], backPat
               onClick={action.onClick}
               className={`inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition ${
                 action.variant === 'outline'
-                  ? 'border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700'
+                  ? 'border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 dark:border-gray-700 dark:bg-black dark:text-gray-300 dark:hover:bg-gray-900'
                   : 'bg-brand-600 text-white hover:bg-brand-700'
               }`}
             >
