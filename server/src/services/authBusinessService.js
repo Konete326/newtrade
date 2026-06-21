@@ -2,6 +2,8 @@ const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const { getUserModel } = require('../services/authService');
 const { AppError } = require('../middleware/errorHandler');
+const DatabaseManager = require('./DatabaseManager');
+const notificationService = require('./notificationService');
 
 const generateTokens = (user) => {
   const accessToken = jwt.sign(
@@ -25,6 +27,10 @@ const login = async (email, password) => {
   user.refreshTokens.push({ token: tokens.refreshToken, expiresAt });
   user.lastLogin = new Date();
   await user.save();
+  // Fire-and-forget login notification (don't block auth)
+  DatabaseManager.getConnection(user.companyId).then(() => {
+    notificationService.notifyLogin(user).catch(() => {});
+  }).catch(() => {});
   return { user: user.toJSON(), ...tokens };
 };
 
@@ -44,7 +50,14 @@ const refresh = async (token) => {
 
 const logout = async (userId, token) => {
   const User = await getUserModel();
+  const user = await User.findById(userId);
   await User.findByIdAndUpdate(userId, { $pull: { refreshTokens: { token } } });
+  // Fire-and-forget logout notification
+  if (user) {
+    DatabaseManager.getConnection(user.companyId).then(() => {
+      notificationService.notifyLogout(user).catch(() => {});
+    }).catch(() => {});
+  }
 };
 
 const getProfile = async (userId) => {

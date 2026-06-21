@@ -20,6 +20,7 @@ const expenseRoutes = require('./routes/expenseRoutes');
 const reportRoutes = require('./routes/reportRoutes');
 const printRoutes = require('./routes/printRoutes');
 const adminRoutes = require('./routes/adminRoutes');
+const notificationRoutes = require('./routes/notificationRoutes');
 
 const app = express();
 
@@ -70,6 +71,7 @@ app.use('/api/v1/expenses', expenseRoutes);
 app.use('/api/v1/reports', reportRoutes);
 app.use('/api/v1/print', printRoutes);
 app.use('/api/v1/admin', adminRoutes);
+app.use('/api/v1/notifications', notificationRoutes);
 
 app.get('/health', (req, res) => {
   res.json({ success: true, message: 'Trader Desktop API is running', data: null });
