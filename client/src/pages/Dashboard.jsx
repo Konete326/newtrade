@@ -4,7 +4,7 @@ import { reportService } from '../services/reportService';
 import { formatCurrency } from '../utils/formatters';
 import PageHeader from '../components/PageHeader';
 import LoadingSpinner from '../components/LoadingSpinner';
-import { ShoppingCart, Receipt, Package, TrendingUp, ArrowUpRight, ArrowDownRight } from 'lucide-react';
+import { ShoppingCart, Receipt, Package, TrendingUp } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell } from 'recharts';
 
 const COLORS = ['#6366f1', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'];
@@ -27,10 +27,10 @@ export default function Dashboard() {
   if (loading) return <LoadingSpinner />;
 
   const kpis = [
-    { label: 'Total Sales', value: formatCurrency(data?.totalSales || 0), icon: Receipt, color: 'brand', change: '+12.5%', up: true },
-    { label: 'Total Purchases', value: formatCurrency(data?.totalPurchases || 0), icon: ShoppingCart, color: 'success', change: '+8.2%', up: true },
-    { label: 'Products', value: data?.productCount || 0, icon: Package, color: 'warning', change: '+3', up: true },
-    { label: 'Outstanding', value: formatCurrency(data?.outstanding || 0), icon: TrendingUp, color: 'error', change: '-5.1%', up: false },
+    { label: 'Total Sales', value: formatCurrency(data?.totalSales || 0), icon: Receipt, color: 'brand' },
+    { label: 'Cash Sales', value: formatCurrency(data?.cashSales || 0), icon: ShoppingCart, color: 'success' },
+    { label: 'Products', value: data?.productCount || 0, icon: Package, color: 'warning' },
+    { label: 'Outstanding', value: formatCurrency(data?.outstanding || 0), icon: TrendingUp, color: 'error' },
   ];
 
   const recentSales = data?.recentSales || [];
@@ -50,10 +50,7 @@ export default function Dashboard() {
                 <div className={`flex h-11 w-11 items-center justify-center rounded-lg bg-${kpi.color}-100 dark:bg-${kpi.color}-500/15`}>
                   <Icon size={20} className={`text-${kpi.color}-600 dark:text-${kpi.color}-400`} />
                 </div>
-                <span className={`flex items-center gap-0.5 text-xs font-medium ${kpi.up ? 'text-success-600' : 'text-error-600'}`}>
-                  {kpi.change}
-                  {kpi.up ? <ArrowUpRight size={12} /> : <ArrowDownRight size={12} />}
-                </span>
+                <span className="text-xs font-medium text-gray-400 dark:text-gray-500">{kpi.label === 'Total Sales' ? `${data?.transactionCount || 0} txns` : ''}</span>
               </div>
               <div className="mt-3">
                 <p className="text-2xl font-bold text-gray-900 dark:text-white">{kpi.value}</p>
