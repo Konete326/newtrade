@@ -6,7 +6,7 @@ export default function ConfirmDialog({ onConfirm, onCancel, title = 'Confirm Ac
   return (
     <div className="fixed inset-0 z-[99999] flex items-center justify-center p-4">
       <div className="fixed inset-0 bg-black/50" onClick={onCancel} />
-      <div className="relative w-full max-w-md rounded-2xl bg-white p-6 shadow-xl dark:bg-gray-900">
+      <div className="relative w-full max-w-md rounded-2xl bg-white p-6 shadow-xl dark:bg-black">
         <div className="mb-4 flex items-center gap-3">
           <div className={`flex h-10 w-10 items-center justify-center rounded-full ${variant === 'danger' ? 'bg-error-100 dark:bg-error-500/15' : 'bg-brand-100 dark:bg-brand-500/15'}`}>
             <AlertTriangle size={20} className={variant === 'danger' ? 'text-error-600' : 'text-brand-600'} />

@@ -31,7 +31,7 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-[9999] flex w-full border-b border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
+    <header className="sticky top-0 z-[9999] flex w-full border-b border-gray-200 bg-white dark:border-gray-800 dark:bg-black">
       <div className="flex w-full items-center justify-between px-4 py-3 lg:px-6">
         <div className="flex items-center gap-3">
           <button
@@ -67,7 +67,7 @@ export default function Header() {
             </button>
 
             {userOpen && (
-              <div className="absolute right-0 top-full mt-2 w-64 rounded-xl border border-gray-200 bg-white p-3 shadow-lg dark:border-gray-700 dark:bg-gray-900">
+              <div className="absolute right-0 top-full mt-2 w-64 rounded-xl border border-gray-200 bg-white p-3 shadow-lg dark:border-gray-700 dark:bg-black">
                 <div className="mb-3 border-b border-gray-200 pb-3 dark:border-gray-700">
                   <p className="text-sm font-semibold text-gray-800 dark:text-gray-200">{user?.name || 'User'}</p>
                   <p className="text-xs text-gray-500 dark:text-gray-400">{user?.email || ''}</p>

@@ -50,7 +50,7 @@ export default function PurchaseForm() {
     <div className="p-4 lg:p-6">
       <PageHeader title="New Purchase" subtitle="Record a purchase order with landed cost" backPath="/purchases" />
       <form onSubmit={handleSubmit} className="mx-auto max-w-5xl space-y-6">
-        <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-theme-xs dark:border-gray-800 dark:bg-gray-900">
+        <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-theme-xs dark:border-gray-800 dark:bg-black">
           <h3 className="mb-4 text-sm font-semibold text-gray-800 dark:text-gray-200">Purchase Details</h3>
           <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
             <FormInput label="Vendor ID" name="vendorId" value={form.vendorId} onChange={set('vendorId')} required placeholder="e.g. vendor _id" rules={[validators.required]} />
@@ -59,7 +59,7 @@ export default function PurchaseForm() {
           </div>
         </div>
 
-        <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-theme-xs dark:border-gray-800 dark:bg-gray-900">
+        <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-theme-xs dark:border-gray-800 dark:bg-black">
           <div className="mb-4 flex items-center justify-between">
             <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200">Items</h3>
             <button type="button" onClick={addItem} className="inline-flex items-center gap-1 rounded-lg bg-brand-50 px-3 py-1.5 text-xs font-medium text-brand-700 hover:bg-brand-100 dark:bg-brand-500/15 dark:text-brand-400"><Plus size={14} /> Add Item</button>
@@ -145,7 +145,7 @@ export default function PurchaseForm() {
     <div className="p-4 lg:p-6">
       <PageHeader title="New Purchase" subtitle="Record a purchase order with landed cost" backPath="/purchases" />
       <form onSubmit={handleSubmit} className="mx-auto max-w-5xl space-y-6">
-        <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-theme-xs dark:border-gray-800 dark:bg-gray-900">
+        <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-theme-xs dark:border-gray-800 dark:bg-black">
           <h3 className="mb-4 text-sm font-semibold text-gray-800 dark:text-gray-200">Purchase Details</h3>
           <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
             <div>
@@ -165,7 +165,7 @@ export default function PurchaseForm() {
           </div>
         </div>
 
-        <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-theme-xs dark:border-gray-800 dark:bg-gray-900">
+        <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-theme-xs dark:border-gray-800 dark:bg-black">
           <div className="mb-4 flex items-center justify-between">
             <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200">Items</h3>
             <button type="button" onClick={addItem} className="inline-flex items-center gap-1 rounded-lg bg-brand-50 px-3 py-1.5 text-xs font-medium text-brand-700 hover:bg-brand-100 dark:bg-brand-500/15 dark:text-brand-400"><Plus size={14} /> Add Item</button>

@@ -18,8 +18,8 @@ export default function FormModal({ onClose, title, children, size = 'md' }) {
   return (
     <div className="fixed inset-0 z-[99999] flex items-center justify-center p-4">
       <div className="fixed inset-0 bg-black/50 transition-opacity" onClick={onClose} />
-      <div className={`relative w-full ${sizes[size] || sizes.md} max-h-[90vh] overflow-y-auto rounded-2xl bg-white shadow-xl dark:bg-gray-900`}>
-        <div className="sticky top-0 z-10 flex items-center justify-between border-b border-gray-200 bg-white px-6 py-4 dark:border-gray-800 dark:bg-gray-900">
+      <div className={`relative w-full ${sizes[size] || sizes.md} max-h-[90vh] overflow-y-auto rounded-2xl bg-white shadow-xl dark:bg-black`}>
+        <div className="sticky top-0 z-10 flex items-center justify-between border-b border-gray-200 bg-white px-6 py-4 dark:border-gray-800 dark:bg-black">
           <h2 className="text-lg font-semibold text-gray-900 dark:text-white">{title}</h2>
           <button onClick={onClose} className="flex h-8 w-8 items-center justify-center rounded-lg text-gray-500 transition hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-200">
             <X size={20} />

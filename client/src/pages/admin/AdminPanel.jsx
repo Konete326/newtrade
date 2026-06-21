@@ -32,15 +32,15 @@ export default function AdminPanel() {
       <PageHeader title="Admin Panel" subtitle="System administration — SUPER_ADMIN only" />
       {health && (
         <div className="mb-6 grid grid-cols-1 gap-4 md:grid-cols-3">
-          <div className="rounded-xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-gray-900">
+          <div className="rounded-xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-black">
             <div className="flex items-center gap-2"><Activity size={18} className="text-success-600" /><span className="text-sm text-gray-500">System Status</span></div>
             <p className="mt-1 text-lg font-bold text-success-600">{health.status || 'Healthy'}</p>
           </div>
-          <div className="rounded-xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-gray-900">
+          <div className="rounded-xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-black">
             <p className="text-sm text-gray-500">Total Tenants</p>
             <p className="mt-1 text-lg font-bold text-gray-900 dark:text-white">{tenants.length}</p>
           </div>
-          <div className="rounded-xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-gray-900">
+          <div className="rounded-xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-black">
             <p className="text-sm text-gray-500">Version</p>
             <p className="mt-1 text-lg font-bold text-gray-900 dark:text-white">{health.version || '1.0.0'}</p>
           </div>

@@ -78,7 +78,7 @@ export default function Sidebar() {
 
   return (
     <aside
-      className={`fixed left-0 top-0 z-[9999] flex h-screen flex-col border-r border-gray-200 bg-white transition-all duration-300 dark:border-gray-800 dark:bg-gray-900 lg:static lg:translate-x-0 ${
+      className={`fixed left-0 top-0 z-[9999] flex h-screen flex-col border-r border-gray-200 bg-white transition-all duration-300 dark:border-gray-800 dark:bg-black lg:static lg:translate-x-0 ${
         sidebarToggle ? 'w-[290px] translate-x-0' : 'w-[290px] -translate-x-full lg:w-[90px] lg:translate-x-0'
       }`}
     >

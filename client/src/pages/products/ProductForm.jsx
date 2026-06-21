@@ -99,7 +99,7 @@ export default function ProductForm() {
   return (
     <div className="p-4 lg:p-6">
       <PageHeader title={isEdit ? 'Edit Product' : 'New Product'} subtitle="Fill in product details" backPath="/products" />
-      <form onSubmit={handleSubmit} className="mx-auto max-w-4xl rounded-xl border border-gray-200 bg-white p-6 shadow-theme-xs dark:border-gray-800 dark:bg-gray-900">
+      <form onSubmit={handleSubmit} className="mx-auto max-w-4xl rounded-xl border border-gray-200 bg-white p-6 shadow-theme-xs dark:border-gray-800 dark:bg-black">
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
           <div>
             <label className="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300">Product Name *</label>

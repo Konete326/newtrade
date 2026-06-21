@@ -40,7 +40,7 @@ export default function POSPage() {
       <PageHeader title="Quick POS" subtitle="Fast point-of-sale checkout" />
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         <div className="lg:col-span-2 space-y-4">
-          <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-theme-xs dark:border-gray-800 dark:bg-gray-900">
+          <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-theme-xs dark:border-gray-800 dark:bg-black">
             <div className="mb-3 flex items-center justify-between">
               <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200">Items</h3>
               <button onClick={addItem} className="inline-flex items-center gap-1 rounded-lg bg-brand-50 px-3 py-1.5 text-xs font-medium text-brand-700 hover:bg-brand-100 dark:bg-brand-500/15 dark:text-brand-400"><Plus size={14} /> Add</button>
@@ -59,7 +59,7 @@ export default function POSPage() {
           </div>
         </div>
 
-        <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-theme-xs dark:border-gray-800 dark:bg-gray-900">
+        <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-theme-xs dark:border-gray-800 dark:bg-black">
           <h3 className="mb-4 text-sm font-semibold text-gray-800 dark:text-gray-200">Checkout</h3>
           <div className="mb-4">
             <label className="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300">Customer ID</label>

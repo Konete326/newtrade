@@ -45,7 +45,7 @@ export default function Dashboard() {
         {kpis.map((kpi) => {
           const Icon = kpi.icon;
           return (
-            <div key={kpi.label} className="rounded-xl border border-gray-200 bg-white p-5 shadow-theme-xs dark:border-gray-800 dark:bg-gray-900">
+            <div key={kpi.label} className="rounded-xl border border-gray-200 bg-white p-5 shadow-theme-xs dark:border-gray-800 dark:bg-black">
               <div className="flex items-center justify-between">
                 <div className={`flex h-11 w-11 items-center justify-center rounded-lg bg-${kpi.color}-100 dark:bg-${kpi.color}-500/15`}>
                   <Icon size={20} className={`text-${kpi.color}-600 dark:text-${kpi.color}-400`} />
@@ -62,7 +62,7 @@ export default function Dashboard() {
       </div>
 
       <div className="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-2">
-        <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-theme-xs dark:border-gray-800 dark:bg-gray-900">
+        <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-theme-xs dark:border-gray-800 dark:bg-black">
           <h3 className="mb-4 text-sm font-semibold text-gray-800 dark:text-gray-200">Monthly Sales</h3>
           <div style={{ height: 256, width: '100%' }}>
             {mounted && (
@@ -79,7 +79,7 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-theme-xs dark:border-gray-800 dark:bg-gray-900">
+        <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-theme-xs dark:border-gray-800 dark:bg-black">
           <h3 className="mb-4 text-sm font-semibold text-gray-800 dark:text-gray-200">Sales Trend</h3>
           <div style={{ height: 256, width: '100%' }}>
             {mounted && (
@@ -98,7 +98,7 @@ export default function Dashboard() {
       </div>
 
       <div className="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-3">
-        <div className="col-span-1 rounded-xl border border-gray-200 bg-white p-5 shadow-theme-xs dark:border-gray-800 dark:bg-gray-900">
+        <div className="col-span-1 rounded-xl border border-gray-200 bg-white p-5 shadow-theme-xs dark:border-gray-800 dark:bg-black">
           <h3 className="mb-4 text-sm font-semibold text-gray-800 dark:text-gray-200">Top Products</h3>
           {topProducts.length > 0 ? (
             <div style={{ height: 224, width: '100%' }}>
@@ -120,7 +120,7 @@ export default function Dashboard() {
           )}
         </div>
 
-        <div className="col-span-2 rounded-xl border border-gray-200 bg-white p-5 shadow-theme-xs dark:border-gray-800 dark:bg-gray-900">
+        <div className="col-span-2 rounded-xl border border-gray-200 bg-white p-5 shadow-theme-xs dark:border-gray-800 dark:bg-black">
           <div className="mb-4 flex items-center justify-between">
             <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200">Recent Sales</h3>
             <button onClick={() => navigate('/sales')} className="text-xs font-medium text-brand-600 hover:text-brand-700 dark:text-brand-400">View All</button>

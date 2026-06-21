@@ -23,21 +23,21 @@ export default function DSRDetail() {
       <PageHeader title={`DSR #${id?.slice(-6)}`} subtitle={`Salesman: ${dsr.salesmanName || '-'}`} backPath="/dsr" />
       <div className="mx-auto max-w-4xl space-y-6">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-          <div className="rounded-xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-gray-900">
+          <div className="rounded-xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-black">
             <p className="text-xs text-gray-500 dark:text-gray-400">Total Sales</p>
             <p className="mt-1 text-xl font-bold text-gray-900 dark:text-white">{formatCurrency(dsr.totalSales || 0)}</p>
           </div>
-          <div className="rounded-xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-gray-900">
+          <div className="rounded-xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-black">
             <p className="text-xs text-gray-500 dark:text-gray-400">Collections</p>
             <p className="mt-1 text-xl font-bold text-gray-900 dark:text-white">{formatCurrency(dsr.totalCollections || 0)}</p>
           </div>
-          <div className="rounded-xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-gray-900">
+          <div className="rounded-xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-black">
             <p className="text-xs text-gray-500 dark:text-gray-400">Date</p>
             <p className="mt-1 text-xl font-bold text-gray-900 dark:text-white">{formatDate(dsr.date)}</p>
           </div>
         </div>
         {dsr.entries?.length > 0 && (
-          <div className="rounded-xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-gray-900">
+          <div className="rounded-xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-black">
             <h3 className="mb-4 text-sm font-semibold text-gray-800 dark:text-gray-200">Entries</h3>
             <table className="w-full">
               <thead><tr className="border-b border-gray-200 dark:border-gray-800">

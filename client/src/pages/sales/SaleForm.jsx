@@ -53,7 +53,7 @@ export default function SaleForm() {
     <div className="p-4 lg:p-6">
       <PageHeader title="New Sale" subtitle="Create a sales invoice" backPath="/sales" />
       <form onSubmit={handleSubmit} className="mx-auto max-w-5xl space-y-6">
-        <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-theme-xs dark:border-gray-800 dark:bg-gray-900">
+        <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-theme-xs dark:border-gray-800 dark:bg-black">
           <h3 className="mb-4 text-sm font-semibold text-gray-800 dark:text-gray-200">Sale Details</h3>
           <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
             <FormInput label="Customer ID" name="customerId" value={form.customerId} onChange={set('customerId')} required placeholder="e.g. customer _id" rules={[validators.required]} />
@@ -62,7 +62,7 @@ export default function SaleForm() {
           </div>
         </div>
 
-        <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-theme-xs dark:border-gray-800 dark:bg-gray-900">
+        <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-theme-xs dark:border-gray-800 dark:bg-black">
           <div className="mb-4 flex items-center justify-between">
             <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200">Items</h3>
             <button type="button" onClick={addItem} className="inline-flex items-center gap-1 rounded-lg bg-brand-50 px-3 py-1.5 text-xs font-medium text-brand-700 hover:bg-brand-100 dark:bg-brand-500/15 dark:text-brand-400"><Plus size={14} /> Add Item</button>
@@ -151,7 +151,7 @@ export default function SaleForm() {
     <div className="p-4 lg:p-6">
       <PageHeader title="New Sale" subtitle="Create a sales invoice" backPath="/sales" />
       <form onSubmit={handleSubmit} className="mx-auto max-w-5xl space-y-6">
-        <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-theme-xs dark:border-gray-800 dark:bg-gray-900">
+        <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-theme-xs dark:border-gray-800 dark:bg-black">
           <h3 className="mb-4 text-sm font-semibold text-gray-800 dark:text-gray-200">Sale Details</h3>
           <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
             <div>
@@ -171,7 +171,7 @@ export default function SaleForm() {
           </div>
         </div>
 
-        <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-theme-xs dark:border-gray-800 dark:bg-gray-900">
+        <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-theme-xs dark:border-gray-800 dark:bg-black">
           <div className="mb-4 flex items-center justify-between">
             <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200">Items</h3>
             <button type="button" onClick={addItem} className="inline-flex items-center gap-1 rounded-lg bg-brand-50 px-3 py-1.5 text-xs font-medium text-brand-700 hover:bg-brand-100 dark:bg-brand-500/15 dark:text-brand-400"><Plus size={14} /> Add Item</button>

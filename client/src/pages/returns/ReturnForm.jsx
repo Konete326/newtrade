@@ -42,13 +42,13 @@ export default function ReturnForm() {
     <div className="p-4 lg:p-6">
       <PageHeader title="New Return" subtitle="Record a sale return" backPath="/returns" />
       <form onSubmit={handleSubmit} className="mx-auto max-w-4xl space-y-6">
-        <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-theme-xs dark:border-gray-800 dark:bg-gray-900">
+        <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-theme-xs dark:border-gray-800 dark:bg-black">
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
             <FormInput label="Sale ID" name="saleId" value={form.saleId} onChange={set('saleId')} required placeholder="e.g. sale _id" rules={[validators.required]} />
             <FormInput label="Reason" name="reason" value={form.reason} onChange={set('reason')} placeholder="e.g. Damaged product" />
           </div>
         </div>
-        <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-theme-xs dark:border-gray-800 dark:bg-gray-900">
+        <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-theme-xs dark:border-gray-800 dark:bg-black">
           <div className="mb-4 flex items-center justify-between">
             <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200">Return Items</h3>
             <button type="button" onClick={addItem} className="inline-flex items-center gap-1 rounded-lg bg-brand-50 px-3 py-1.5 text-xs font-medium text-brand-700 dark:bg-brand-500/15 dark:text-brand-400"><Plus size={14} /> Add</button>
@@ -111,7 +111,7 @@ export default function ReturnForm() {
     <div className="p-4 lg:p-6">
       <PageHeader title="New Return" subtitle="Record a sale return" backPath="/returns" />
       <form onSubmit={handleSubmit} className="mx-auto max-w-4xl space-y-6">
-        <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-theme-xs dark:border-gray-800 dark:bg-gray-900">
+        <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-theme-xs dark:border-gray-800 dark:bg-black">
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
             <div>
               <label className="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300">Sale ID *</label>
@@ -124,7 +124,7 @@ export default function ReturnForm() {
             </div>
           </div>
         </div>
-        <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-theme-xs dark:border-gray-800 dark:bg-gray-900">
+        <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-theme-xs dark:border-gray-800 dark:bg-black">
           <div className="mb-4 flex items-center justify-between">
             <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200">Return Items</h3>
             <button type="button" onClick={addItem} className="inline-flex items-center gap-1 rounded-lg bg-brand-50 px-3 py-1.5 text-xs font-medium text-brand-700 dark:bg-brand-500/15 dark:text-brand-400"><Plus size={14} /> Add</button>
