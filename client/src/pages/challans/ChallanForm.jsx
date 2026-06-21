@@ -1,6 +1,79 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { challanService } from '../../services/challanService';
+import FormInput from '../../components/FormInput';
+import PageHeader from '../../components/PageHeader';
+import { validators, inputFilters } from '../../utils/validators';
+import { Save, Plus, Trash2 } from 'lucide-react';
+import { toast } from 'sonner';
+
+const itemInputClass = 'rounded-lg border border-gray-200 px-3 py-2 text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:border-brand-300 focus:ring-brand-500/10';
+
+export default function ChallanForm() {
+  const navigate = useNavigate();
+  const [saving, setSaving] = useState(false);
+  const [form, setForm] = useState({ customerId: '', deliveryAddress: '', notes: '' });
+  const [items, setItems] = useState([{ productId: '', quantity: '' }]);
+  const [errors, setErrors] = useState({});
+
+  const set = (field) => (val) => setForm((p) => ({ ...p, [field]: val }));
+  const addItem = () => setItems((p) => [...p, { productId: '', quantity: '' }]);
+  const removeItem = (i) => setItems((p) => p.filter((_, idx) => idx !== i));
+  const updateItem = (i, field, val) => setItems((p) => p.map((it, idx) => idx === i ? { ...it, [field]: val } : it));
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const newErrors = {};
+    if (!form.customerId) newErrors.customerId = 'Customer is required';
+    if (items.some((it) => !it.productId || !it.quantity)) newErrors.items = 'Product and quantity required';
+    setErrors(newErrors);
+    if (Object.keys(newErrors).length) return;
+    setSaving(true);
+    try {
+      await challanService.create({ ...form, items: items.map((it) => ({ productId: it.productId, quantity: Number(it.quantity) })) });
+      toast.success('Challan created');
+      navigate('/challans');
+    } catch (err) { toast.error(err.response?.data?.message || 'Failed'); }
+    finally { setSaving(false); }
+  };
+
+  return (
+    <div className="p-4 lg:p-6">
+      <PageHeader title="New Challan" subtitle="Create delivery challan" backPath="/challans" />
+      <form onSubmit={handleSubmit} className="mx-auto max-w-4xl space-y-6">
+        <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-theme-xs dark:border-gray-800 dark:bg-gray-900">
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+            <FormInput label="Customer ID" name="customerId" value={form.customerId} onChange={set('customerId')} required placeholder="e.g. customer _id" rules={[validators.required]} />
+            <FormInput label="Delivery Address" name="deliveryAddress" value={form.deliveryAddress} onChange={set('deliveryAddress')} placeholder="e.g. Shop 12, Market Area" />
+          </div>
+        </div>
+        <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-theme-xs dark:border-gray-800 dark:bg-gray-900">
+          <div className="mb-4 flex items-center justify-between">
+            <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200">Items</h3>
+            <button type="button" onClick={addItem} className="inline-flex items-center gap-1 rounded-lg bg-brand-50 px-3 py-1.5 text-xs font-medium text-brand-700 dark:bg-brand-500/15 dark:text-brand-400"><Plus size={14} /> Add</button>
+          </div>
+          {errors.items && <p className="mb-3 text-xs text-error-600">{errors.items}</p>}
+          <div className="space-y-3">
+            {items.map((item, i) => (
+              <div key={i} className="flex items-center gap-3">
+                <input value={item.productId} onChange={(e) => updateItem(i, 'productId', e.target.value)} placeholder="Product ID" className={`flex-1 ${itemInputClass}`} />
+                <input value={item.quantity} onChange={(e) => updateItem(i, 'quantity', inputFilters.decimalOnly(e.target.value))} placeholder="Qty" className={`w-24 ${itemInputClass}`} />
+                {items.length > 1 && <button type="button" onClick={() => removeItem(i)} className="p-2 text-error-500"><Trash2 size={15} /></button>}
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="flex justify-end gap-3">
+          <button type="button" onClick={() => navigate('/challans')} className="rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300">Cancel</button>
+          <button type="submit" disabled={saving} className="inline-flex items-center gap-2 rounded-lg bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-700 disabled:opacity-60"><Save size={16} />{saving ? 'Saving...' : 'Create Challan'}</button>
+        </div>
+      </form>
+    </div>
+  );
+}
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { challanService } from '../../services/challanService';
 import PageHeader from '../../components/PageHeader';
 import { Save, Plus, Trash2 } from 'lucide-react';
 import { toast } from 'sonner';

@@ -44,6 +44,22 @@ export const validators = {
     const regex = /^[A-Za-z0-9-]{2,30}$/;
     return regex.test(value) ? null : 'SKU: 2-30 letters, numbers, or hyphens only';
   },
+  password: (value) => {
+    if (!value) return null;
+    return value.length >= 6 ? null : 'Minimum 6 characters required';
+  },
+  alphaOnly: (value) => {
+    if (!value) return null;
+    return /^[a-zA-Z\s]*$/.test(value) ? null : 'Only letters and spaces allowed';
+  },
+};
+
+// Input filters — strip invalid characters on each keystroke
+export const inputFilters = {
+  numbersOnly: (value) => value.replace(/[^0-9]/g, ''),
+  decimalOnly: (value) => value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1'),
+  alphaOnly: (value) => value.replace(/[^a-zA-Z\s]/g, ''),
+  alphaNumeric: (value) => value.replace(/[^a-zA-Z0-9\s-]/g, ''),
 };
 
 export const validateField = (value, rules) => {

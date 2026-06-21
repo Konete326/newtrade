@@ -5,9 +5,12 @@ import DataTable from '../../components/DataTable';
 import PageHeader from '../../components/PageHeader';
 import FormModal from '../../components/FormModal';
 import ConfirmDialog from '../../components/ConfirmDialog';
-import { validators } from '../../utils/validators';
+import FormInput from '../../components/FormInput';
+import { validators, inputFilters } from '../../utils/validators';
 import { Plus, Trash2 } from 'lucide-react';
 import { toast } from 'sonner';
+
+const EMPTY = { name: '', email: '', password: '', role: 'SALES', phone: '' };
 
 export default function UserManagement() {
   const { user: currentUser } = useAuth();
@@ -15,7 +18,7 @@ export default function UserManagement() {
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [deleteTarget, setDeleteTarget] = useState(null);
-  const [form, setForm] = useState({ name: '', email: '', password: '', role: 'SALES', phone: '' });
+  const [form, setForm] = useState({ ...EMPTY });
   const [errors, setErrors] = useState({});
 
   const fetchUsers = () => {
@@ -24,6 +27,8 @@ export default function UserManagement() {
   };
 
   useEffect(() => { fetchUsers(); }, []);
+
+  const set = (field) => (val) => setForm((p) => ({ ...p, [field]: val }));
 
   const handleSave = async (e) => {
     e.preventDefault();
@@ -34,8 +39,13 @@ export default function UserManagement() {
     if (!form.password || form.password.length < 6) newErrors.password = 'Min 6 characters';
     setErrors(newErrors);
     if (Object.keys(newErrors).length) return;
-    try { await userService.create(form); toast.success('User created'); setShowForm(false); setForm({ name: '', email: '', password: '', role: 'SALES', phone: '' }); fetchUsers(); }
-    catch (err) { toast.error(err.response?.data?.message || 'Failed'); }
+    try {
+      await userService.create(form);
+      toast.success('User created');
+      setShowForm(false);
+      setForm({ ...EMPTY });
+      fetchUsers();
+    } catch (err) { toast.error(err.response?.data?.message || 'Failed'); }
   };
 
   const handleDelete = async () => {
@@ -67,12 +77,17 @@ export default function UserManagement() {
       {showForm && (
         <FormModal title="Add User" onClose={() => setShowForm(false)}>
           <form onSubmit={handleSave} className="flex flex-col gap-4">
-            <div><label className="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300">Name *</label><input value={form.name} onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))} placeholder="e.g. Ali Hassan" className={`w-full rounded-lg border px-4 py-2.5 text-sm dark:bg-gray-800 dark:text-gray-200 ${errors.name ? 'border-error-400' : 'border-gray-200 dark:border-gray-700'}`} />{errors.name && <p className="mt-1 text-xs text-error-600">{errors.name}</p>}</div>
-            <div><label className="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300">Email *</label><input value={form.email} onChange={(e) => setForm((p) => ({ ...p, email: e.target.value }))} placeholder="e.g. ali@traderdesk.com" className={`w-full rounded-lg border px-4 py-2.5 text-sm dark:bg-gray-800 dark:text-gray-200 ${errors.email ? 'border-error-400' : 'border-gray-200 dark:border-gray-700'}`} />{errors.email && <p className="mt-1 text-xs text-error-600">{errors.email}</p>}</div>
-            <div><label className="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300">Password *</label><input type="password" value={form.password} onChange={(e) => setForm((p) => ({ ...p, password: e.target.value }))} placeholder="Min 6 characters" className={`w-full rounded-lg border px-4 py-2.5 text-sm dark:bg-gray-800 dark:text-gray-200 ${errors.password ? 'border-error-400' : 'border-gray-200 dark:border-gray-700'}`} />{errors.password && <p className="mt-1 text-xs text-error-600">{errors.password}</p>}</div>
+            <FormInput label="Name" name="name" value={form.name} onChange={set('name')} required placeholder="e.g. Ali Hassan" rules={[validators.required]} />
+            <FormInput label="Email" name="email" type="email" value={form.email} onChange={set('email')} required placeholder="e.g. ali@traderdesk.com" rules={[validators.required, validators.email]} />
+            <FormInput label="Password" name="password" type="password" value={form.password} onChange={set('password')} required placeholder="Min 6 characters" rules={[validators.required, validators.password]} />
             <div className="grid grid-cols-2 gap-4">
-              <div><label className="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300">Role</label><select value={form.role} onChange={(e) => setForm((p) => ({ ...p, role: e.target.value }))} className="w-full rounded-lg border border-gray-200 px-4 py-2.5 text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200"><option value="SALES">Sales</option><option value="MANAGER">Manager</option><option value="ADMIN">Admin</option><option value="VIEWER">Viewer</option></select></div>
-              <div><label className="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300">Phone</label><input value={form.phone} onChange={(e) => setForm((p) => ({ ...p, phone: e.target.value }))} placeholder="e.g. 03001234567" className="w-full rounded-lg border border-gray-200 px-4 py-2.5 text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200" /></div>
+              <FormInput label="Role" name="role" value={form.role} onChange={set('role')}>
+                <option value="SALES">Sales</option>
+                <option value="MANAGER">Manager</option>
+                <option value="ADMIN">Admin</option>
+                <option value="VIEWER">Viewer</option>
+              </FormInput>
+              <FormInput label="Phone" name="phone" value={form.phone} onChange={set('phone')} filter={inputFilters.numbersOnly} placeholder="e.g. 03001234567" rules={[validators.phone]} />
             </div>
             <button type="submit" className="rounded-lg bg-brand-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-brand-700">Create User</button>
           </form>
