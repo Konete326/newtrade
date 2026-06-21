@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Bell, Check, CheckCheck, LogIn, LogOut, Activity } from 'lucide-react';
+import { Bell, CheckCheck, LogIn, LogOut, Activity } from 'lucide-react';
 import { notificationService } from '../services/notificationService';
 
 const POLL_INTERVAL = 30000; // 30 seconds
