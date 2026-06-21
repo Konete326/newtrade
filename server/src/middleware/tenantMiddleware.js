@@ -4,14 +4,15 @@ const { AppError } = require('./errorHandler');
 const tenantMiddleware = async (req, res, next) => {
   try {
     if (!req.user || !req.user.companyId) {
-      throw new AppError('Tenant context not found.', 403);
+      throw new AppError('Tenant context not found.', 401);
     }
     const conn = await DatabaseManager.getConnection(req.user.companyId);
     req.tenantDb = conn;
     req.companyId = req.user.companyId;
     next();
   } catch (error) {
-    next(new AppError('Failed to resolve tenant database.', 500));
+    if (error instanceof AppError) return next(error);
+    next(new AppError('Failed to resolve tenant database.', 401));
   }
 };
 
