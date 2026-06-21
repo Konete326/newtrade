@@ -15,6 +15,8 @@ const getDateRange = (period) => {
 
 const getSalesReport = asyncHandler(async (req, res) => {
   const Sale = DatabaseManager.getModel(req.companyId, 'SaleModel');
+  const Product = DatabaseManager.getModel(req.companyId, 'ProductModel');
+  const Customer = DatabaseManager.getModel(req.companyId, 'CustomerModel');
   const { period = 'month', startDate, endDate } = req.query;
   const range = (startDate && endDate) ? { start: new Date(startDate), end: new Date(endDate) } : getDateRange(period);
   const query = { companyId: req.companyId, isDeleted: false, createdAt: { $gte: range.start, $lte: range.end } };
@@ -22,9 +24,23 @@ const getSalesReport = asyncHandler(async (req, res) => {
   const totalSales = sales.reduce((sum, s) => sum + s.totalAmount, 0);
   const cashSales = sales.filter(s => s.saleType === 'CASH').reduce((sum, s) => sum + s.totalAmount, 0);
   const creditSales = sales.filter(s => s.saleType === 'CREDIT').reduce((sum, s) => sum + s.totalAmount, 0);
+  const productCount = await Product.countDocuments({ companyId: req.companyId, isDeleted: false });
+  const outstanding = await Customer.aggregate([{ $match: { companyId: req.companyId, isDeleted: false } }, { $group: { _id: null, total: { $sum: '$currentBalance' } } }]);
+  const monthly = [];
+  for (let i = 5; i >= 0; i--) {
+    const d = new Date(); d.setMonth(d.getMonth() - i);
+    const mStart = new Date(d.getFullYear(), d.getMonth(), 1);
+    const mEnd = new Date(d.getFullYear(), d.getMonth() + 1, 0);
+    const mSales = sales.filter(s => s.createdAt >= mStart && s.createdAt <= mEnd);
+    monthly.push({ month: mStart.toLocaleString('default', { month: 'short' }), sales: mSales.reduce((sum, s) => sum + s.totalAmount, 0) });
+  }
+  const productQty = {};
+  sales.forEach(s => s.items?.forEach(item => { productQty[item.name || 'Unknown'] = (productQty[item.name || 'Unknown'] || 0) + item.quantity; }));
+  const topProducts = Object.entries(productQty).map(([name, quantity]) => ({ name, quantity })).sort((a, b) => b.quantity - a.quantity).slice(0, 5);
+  const recentSales = sales.sort((a, b) => b.createdAt - a.createdAt).slice(0, 5).map(s => ({ _id: s._id, invoiceNo: s.invoiceNumber, customerName: s.customerId?.name || 'Walk-in', grandTotal: s.totalAmount, createdAt: s.createdAt }));
   res.json({
     success: true, message: 'Sales report fetched',
-    data: { totalSales, cashSales, creditSales, transactionCount: sales.length, period, sales }
+    data: { totalSales, cashSales, creditSales, transactionCount: sales.length, productCount, outstanding: outstanding[0]?.total || 0, period, monthly, topProducts, recentSales, sales }
   });
 });
 

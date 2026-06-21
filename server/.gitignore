@@ -1,0 +1,8 @@
+# Server root for Render/Railway deployment
+# This file tells the hosting platform how to start the backend
+
+node_modules/
+.env
+.env.local
+*.log
+.DS_Store

@@ -18,3 +18,5 @@ server/.env
 client/.env
 docs/skills/
 docs/skills.zip
+browser-screenshot.png
+dashboard-*.png

@@ -13,10 +13,10 @@ const rbacMiddleware = (...allowedRoles) => {
     if (!req.user || !req.user.role) {
       return next(new AppError('Authentication required.', 401));
     }
-    if (!allowedRoles.includes(req.user.role)) {
-      return next(new AppError('Insufficient permissions.', 403));
+    if (req.user.role === 'SUPER_ADMIN' || allowedRoles.includes(req.user.role)) {
+      return next();
     }
-    next();
+    return next(new AppError('Insufficient permissions.', 403));
   };
 };
 

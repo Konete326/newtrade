@@ -12,13 +12,16 @@ const COLORS = ['#6366f1', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'];
 export default function Dashboard() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [mounted, setMounted] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
+    const timer = setTimeout(() => setMounted(true), 100);
     reportService.sales({ period: '30d' })
       .then((res) => setData(res.data.data))
       .catch(() => {})
       .finally(() => setLoading(false));
+    return () => clearTimeout(timer);
   }, []);
 
   if (loading) return <LoadingSpinner />;
@@ -64,31 +67,35 @@ export default function Dashboard() {
       <div className="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-2">
         <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-theme-xs dark:border-gray-800 dark:bg-gray-900">
           <h3 className="mb-4 text-sm font-semibold text-gray-800 dark:text-gray-200">Monthly Sales</h3>
-          <div className="h-64">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={monthlyData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-                <XAxis dataKey="month" tick={{ fontSize: 12 }} stroke="#9ca3af" />
-                <YAxis tick={{ fontSize: 12 }} stroke="#9ca3af" />
-                <Tooltip />
-                <Bar dataKey="sales" fill="#6366f1" radius={[4, 4, 0, 0]} />
-              </BarChart>
-            </ResponsiveContainer>
+          <div style={{ height: 256, width: '100%' }}>
+            {mounted && (
+              <ResponsiveContainer width="100%" height={256}>
+                <BarChart data={monthlyData}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                  <XAxis dataKey="month" tick={{ fontSize: 12 }} stroke="#9ca3af" />
+                  <YAxis tick={{ fontSize: 12 }} stroke="#9ca3af" />
+                  <Tooltip />
+                  <Bar dataKey="sales" fill="#6366f1" radius={[4, 4, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            )}
           </div>
         </div>
 
         <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-theme-xs dark:border-gray-800 dark:bg-gray-900">
           <h3 className="mb-4 text-sm font-semibold text-gray-800 dark:text-gray-200">Sales Trend</h3>
-          <div className="h-64">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={monthlyData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-                <XAxis dataKey="month" tick={{ fontSize: 12 }} stroke="#9ca3af" />
-                <YAxis tick={{ fontSize: 12 }} stroke="#9ca3af" />
-                <Tooltip />
-                <Line type="monotone" dataKey="sales" stroke="#6366f1" strokeWidth={2} dot={{ r: 4 }} />
-              </LineChart>
-            </ResponsiveContainer>
+          <div style={{ height: 256, width: '100%' }}>
+            {mounted && (
+              <ResponsiveContainer width="100%" height={256}>
+                <LineChart data={monthlyData}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                  <XAxis dataKey="month" tick={{ fontSize: 12 }} stroke="#9ca3af" />
+                  <YAxis tick={{ fontSize: 12 }} stroke="#9ca3af" />
+                  <Tooltip />
+                  <Line type="monotone" dataKey="sales" stroke="#6366f1" strokeWidth={2} dot={{ r: 4 }} />
+                </LineChart>
+              </ResponsiveContainer>
+            )}
           </div>
         </div>
       </div>
@@ -97,17 +104,19 @@ export default function Dashboard() {
         <div className="col-span-1 rounded-xl border border-gray-200 bg-white p-5 shadow-theme-xs dark:border-gray-800 dark:bg-gray-900">
           <h3 className="mb-4 text-sm font-semibold text-gray-800 dark:text-gray-200">Top Products</h3>
           {topProducts.length > 0 ? (
-            <div className="h-56">
-              <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
-                  <Pie data={topProducts} dataKey="quantity" nameKey="name" cx="50%" cy="50%" outerRadius={80}>
-                    {topProducts.map((_, i) => (
-                      <Cell key={i} fill={COLORS[i % COLORS.length]} />
-                    ))}
-                  </Pie>
-                  <Tooltip />
-                </PieChart>
-              </ResponsiveContainer>
+            <div style={{ height: 224, width: '100%' }}>
+              {mounted && (
+                <ResponsiveContainer width="100%" height={224}>
+                  <PieChart>
+                    <Pie data={topProducts} dataKey="quantity" nameKey="name" cx="50%" cy="50%" outerRadius={80}>
+                      {topProducts.map((_, i) => (
+                        <Cell key={i} fill={COLORS[i % COLORS.length]} />
+                      ))}
+                    </Pie>
+                    <Tooltip />
+                  </PieChart>
+                </ResponsiveContainer>
+              )}
             </div>
           ) : (
             <p className="py-10 text-center text-sm text-gray-400 dark:text-gray-500">No data available</p>

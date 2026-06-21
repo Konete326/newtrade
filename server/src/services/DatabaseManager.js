@@ -18,7 +18,7 @@ const getConnection = async (companyId) => {
     return connectionCache.get(companyId);
   }
   const dbName = `tenant_${companyId}`;
-  const uri = process.env.MONGO_URI.replace(/\/[^/]*$/, `/${dbName}`);
+  const uri = process.env.MONGO_URI.replace(/\/([^/?]+)(\?|$)/, `/${dbName}$2`);
   const conn = mongoose.createConnection(uri);
   await conn.asPromise();
   connectionCache.set(companyId, conn);
